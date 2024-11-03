@@ -35,6 +35,17 @@ function prepareMonitor()
     centerText("Buildings", 1, colors.black, colors.yellow, "head")
 end
  
+function splitLast(inputstr, sep)
+    if sep == nil then
+      sep = "%s"
+    end
+    local t = {}
+    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+      table.insert(t, str)
+    end
+    return t[#t]
+  end
+
 function printBuildings()
     row = 3
     useLeft = true
@@ -55,7 +66,10 @@ function printBuildings()
         if useLeft then
                position = "left"
         end
-        centerText(v.name.. " - " .. v.type .. " " .. v.level .. "/" .. v.maxLevel, row, colors.black, color, position)     
+        name = 
+
+
+        centerText(splitLast(v.name, "-").. " - " .. v.type .. " " .. v.level .. "/" .. v.maxLevel, row, colors.black, color, position)     
         row = row+1
     end
 end
