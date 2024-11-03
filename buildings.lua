@@ -35,32 +35,33 @@ function prepareMonitor()
     centerText("Buildings", 1, colors.black, colors.yellow, "head")
 end
 
-function formatLocation(pos)
-    return " ("..pos[1]..", "..pos[2]..", "..pos[3]..")"
- 
 function printBuildings()
     row = 3
     useLeft = true
     for k, v in ipairs(colony.getBuildings()) do
-        if row > 40 then
-            useLeft = false
-            row = 3
-        end
+        if v.maxLevel > 0 then 
+            if row > 40 then
+                useLeft = false
+                row = 3
+            end
 
-        color = colors.white
-        if v.built then
-            color = colors.green
-        elseif v.isWorkingOn then
-            color = colors.orange
+            color = colors.white
+            if v.level = v.maxLevel then
+                color = colors.green
+            elseif v.isWorkingOn then
+                color = colors.orange
+            elseif v.built then
+                color = colors.lime
+            end
+            
+            position = "right"
+            if useLeft then
+                position = "left"
+            end
+            
+            centerText(v.type..""..v.level.."/"..v.maxLevel, row, colors.black, color, position)
+            row = row+1
         end
-        
-        position = "right"
-        if useLeft then
-               position = "left"
-        end
-
-        centerText(v.type .. " " .. v.level .. "/" .. v.maxLevel..formatLocation(v.location), row, colors.black, color, position)     
-        row = row+1
     end
 end
  
