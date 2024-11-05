@@ -37,29 +37,24 @@ end
 
 function printBuildings()
     row = 3
-    useLeft = true
+    position = "right"
     for k, v in ipairs(colony.getBuildings()) do
         if v.maxLevel > 0 then 
             if row > 40 then
-                useLeft = false
+                position = "left"
                 row = 3
             end
 
             color = colors.white
-            if v.level = v.maxLevel then
+            if v.level == v.maxLevel then
                 color = colors.green
             elseif v.isWorkingOn then
                 color = colors.orange
             elseif v.built then
                 color = colors.lime
             end
-            
-            position = "right"
-            if useLeft then
-                position = "left"
-            end
-            
-            centerText(v.type..""..v.level.."/"..v.maxLevel, row, colors.black, color, position)
+
+            centerText(string.format("%s(%d) - %d/%d", v.type, #v.citizens, v.level, v.maxLevel), row, colors.black, color, position)
             row = row+1
         end
     end
