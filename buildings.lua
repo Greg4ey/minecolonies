@@ -37,11 +37,11 @@ end
 
 function printBuildings()
     row = 3
-    position = "right"
+    position = "left"
     for k, v in ipairs(colony.getBuildings()) do
         if v.maxLevel > 0 then 
             if row > 40 then
-                position = "left"
+                position = "right"
                 row = 3
             end
 
